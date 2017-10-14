@@ -1,8 +1,9 @@
 import pg from 'pg'
 import logger from '~/logger'
+import config from '~/config'
 
 // this initializes a connection pool
-const pool = new pg.Pool({})
+const pool = new pg.Pool(config.postgres)
 
 pool.on('error', (err, client) => {
   // if an error is encountered by a client while it sits idle in the pool
