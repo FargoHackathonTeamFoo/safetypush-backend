@@ -1,0 +1,80 @@
+{
+  "name": "node-esnext-boilerplate",
+  "version": "1.0.0",
+  "description": "An opinionated, but ideally up to date NodeJS project boilerplate with ESnext support",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "private": true,
+  "scripts": {
+    "lint": "better-npm-run lint",
+    "dev": "better-npm-run dev",
+    "prestart": "better-npm-run prestart",
+    "start": "better-npm-run start"
+  },
+  "betterScripts": {
+    "lint": {
+      "command": "eslint src",
+      "env": {
+        "NODE_ENV": "development",
+        "BABEL_ENV": "development"
+      }
+    },
+    "dev": {
+      "command": "nodemon --exec babel-node src/server.js",
+      "env": {
+        "NODE_ENV": "development",
+        "BABEL_ENV": "development"
+      }
+    },
+    "prestart": {
+      "command": "rimraf dist && babel --source-maps inline --copy-files src --out-dir dist --quiet",
+      "env": {
+        "NODE_ENV": "production",
+        "BABEL_ENV": "production"
+      }
+    },
+    "start": {
+      "command": "node dist/server.js",
+      "env": {
+        "NODE_ENV": "production",
+        "BABEL_ENV": "production"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marshallford/node-esnext-boilerplate.git"
+  },
+  "author": "Marshall Ford <inbox@marshallford.me> (https://marshallford.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marshallford/node-esnext-boilerplate/issues"
+  },
+  "homepage": "https://github.com/marshallford/node-esnext-boilerplate#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-root-import": "^4.1.8",
+    "better-npm-run": "^0.1.0",
+    "eslint": "^4.2.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.11.0",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "winston": "^2.4.0"
+  }
+}
