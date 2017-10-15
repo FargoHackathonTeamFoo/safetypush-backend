@@ -13,7 +13,7 @@ const pushMessage = async (affectedGeometry, channel, title, pushBody, body, dis
 
 const getAllMessages = async () => {
   const query = `
-    SELECT * FROM message;
+    SELECT * FROM message ORDER BY id DESC;
   `
   const { rows } = await db.query(query)
   return rows
