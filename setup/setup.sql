@@ -1,11 +1,11 @@
-CREATE DATABASE safetypush1
+CREATE DATABASE safetypush
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
-\connect safetypush1;
+\connect safetypush;
 
 CREATE EXTENSION Postgis;
 
