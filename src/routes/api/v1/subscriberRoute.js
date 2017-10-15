@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import config from '~/config'
 import webPush from 'web-push'
-import subscribers from '~/controllers/subscriber_dumb'
+import { pushSubscriber, pushMessage, getChannels } from '~/controllers/subscriber'
 
 const r = Router()
 
@@ -24,7 +24,7 @@ r.post('/', async (req, res, next) => {
       }
   }
 
-  subscribers.push(pushSubscription)
+  pushSubscriber(req.body.longitude || 0, req.body.latitude || 0, pushSubscription)
 
   res.send('Subscription accepted!')
 })

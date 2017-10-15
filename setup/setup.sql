@@ -20,7 +20,9 @@ CREATE TABLE public.subscriber
 (
     id serial NOT NULL,
     location geography,
-    webpush jsonb,
+    endpoint text,
+    p256dh text,
+    auth text,
     CONSTRAINT subscriber_pkey PRIMARY KEY (id)
 );
 

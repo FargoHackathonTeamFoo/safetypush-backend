@@ -1,11 +1,12 @@
 import { Router } from 'express'
-import subscribers from '~/controllers/subscriber_dumb'
-import messages from '~/controllers/message_dumb'
+import { getSubscribers } from '~/controllers/subscriber'
+import { pushMessage, getAllMessages, getMessagesForSubscriber } from '~/controllers/message'
 
 const r = Router()
 
 r.get('/', async (req, res, next) => {
-  res.json(messages)
+  //res.json(getMessagesForSubscriber(req.params.id))
+  res.join(getAllMessages())
 })
 
 r.post('/', async (req, res, next) => {
@@ -16,7 +17,7 @@ r.post('/', async (req, res, next) => {
     channel: req.body.channel
   })
 
-  messages.push(payload)
+  pushMessage()
 
   subscribers.forEach(subscriber => {
     webPush.sendNotification(subscriber, payload, {})
