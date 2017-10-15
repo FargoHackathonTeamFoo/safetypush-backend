@@ -3,6 +3,7 @@ import express from 'express' // HTTP improvements
 import bodyParser from 'body-parser' // Parse JSON
 import cors from 'cors' // Cross-origin resource sharing
 import logger from '~/logger'
+import path from 'path'
 
 import apiV1 from '~/routes/api/v1'
 
