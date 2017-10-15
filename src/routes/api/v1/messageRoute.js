@@ -5,6 +5,14 @@ import { pushMessage, getAllMessages } from '~/controllers/message'
 
 const r = Router()
 
+const subscriberToWebPush = (subscriber) => ({
+  endpoint: subscriber.endpoint,
+  keys: {
+    p256dh: subscriber.p256dh,
+    auth: subscriber.auth,
+  }
+})
+
 r.get('/', async (req, res, next) => {
   //res.json(getMessagesForSubscriber(req.params.id))
   res.join(getAllMessages())
@@ -22,7 +30,7 @@ r.post('/', async (req, res, next) => {
 
   let subscribers = await getSubscribers()
   subscribers.forEach(subscriber => {
-    webPush.sendNotification(subscriber, JSON.stringify(payload), {})
+    webPush.sendNotification(subscriberToWebPush(subscriber), JSON.stringify(payload), {})
       .then(response => {
         console.log(response)
       })

@@ -4,11 +4,13 @@ import { SqlParametersManager, HttpError, hasRequiredFields } from '~/utils'
 const pushSubscriber = async (longitude, latitude, webpush) => {
   //console.log("Here's what i'm going to push to pg", longitude, latitude, webpush)
   const query = `
-    INSERT INTO subscriber (location, webpush)
-    values (ST_Point($1, $2), $3)
+    INSERT INTO subscriber (location, endpoint, p256dh, auth)
+    values (ST_Point($1, $2), $3, $4, $5)
     RETURNING id;
   `
-  const { rows } = await db.query(query, [longitude, latitude, webpush])
+  const { rows } = await db.query(query, [
+    longitude, latitude,
+    webpush.endpoint, webpush.keys.p256dh, webpush.keys.auth])
   return rows
 }
 
@@ -21,7 +23,7 @@ const getSubscribers = async () => {
 }
 
 // todo don't worry about this
-const getSubscibersInGeometry = async () => {
+const getSubscribersInGeometry = async () => {
 
 }
 
