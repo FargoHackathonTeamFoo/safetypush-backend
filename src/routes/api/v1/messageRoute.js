@@ -15,7 +15,7 @@ const subscriberToWebPush = (subscriber) => ({
 
 r.get('/', async (req, res, next) => {
   //res.json(getMessagesForSubscriber(req.params.id))
-  res.join(getAllMessages())
+  res.json(await getAllMessages())
 })
 
 r.post('/', async (req, res, next) => {
