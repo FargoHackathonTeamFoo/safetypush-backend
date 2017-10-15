@@ -11,6 +11,17 @@ An opinionated, but ideally up to date NodeJS project boilerplate with ESnext su
 |`dev`|Starts app and transpiles on the fly, automatic reloads|
 |`lint`|Lint all `.js` files in `/src`|
 
+
 ## TODO & up in the air ideas
 
 * Testing framework
+
+## Getting started
+
+### Download dependencies
+`npm install`
+
+### Generate keypair
+`node_modules/web-push/src/cli.js generate-vapid-keys >> keypair`
+
+Open src/config.js, change dev.vapid.publicKey and dev.vapid.privateKey to values from keypair file.
