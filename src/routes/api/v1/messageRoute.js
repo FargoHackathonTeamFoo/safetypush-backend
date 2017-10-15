@@ -45,17 +45,17 @@ r.post('/', async (req, res, next) => {
         JSON.stringify(payload),
         {}))
   } catch (e) {
-    res.status(500).send(e)
+    res.status(500).json(e)
   }
 
-  res.send('Notification sent!')
+  res.json('Notification sent!')
 })
 
 r.delete('/:id', async (req, res, next) => {
   try {
-    await expireMessage(req.params.id)
+    res.json(await expireMessage(req.params.id))
   } catch (e) {
-    res.status(500).send(e)
+    res.status(500).json(e)
   }
 })
 
