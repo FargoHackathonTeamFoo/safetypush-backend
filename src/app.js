@@ -1,17 +1,10 @@
 import http from 'http' // HTTP Server
-import express, { Router } from 'express' // HTTP improvements
+import express from 'express' // HTTP improvements
 import bodyParser from 'body-parser' // Parse JSON
 import cors from 'cors' // Cross-origin resource sharing
 import logger from '~/logger'
 
-// example route
-const exampleRoute = () => {
-  let example = Router()
-  example.get('/', (req, res) => {
-    return res.json({ message: 'Hello World' })
-  })
-  return example
-}
+import apiV1 from '~/routes/api/v1'
 
 // define web server
 const app = express()
@@ -38,7 +31,7 @@ app.use((err, req, res, next) => {
 })
 
 // define routes here, before catch-all functions, after cors setup and logging middlware
-app.use('/api/v1', exampleRoute())
+app.use('/api/v1', apiV1)
 
 // 404
 app.use((req, res) => {
