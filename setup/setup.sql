@@ -42,3 +42,9 @@ CREATE TABLE public.message
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
+
+INSERT INTO public.channel (name) VALUES "fargo";
+INSERT INTO public.channel (name) VALUES "weather";
+INSERT INTO public.channel (name) VALUES "road";
+INSERT INTO public.channel (name) VALUES "fire";
+INSERT INTO public.channel (name) VALUES "police";

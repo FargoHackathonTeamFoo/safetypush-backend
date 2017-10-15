@@ -2,7 +2,6 @@ import db from '~/libs/db'
 import { SqlParametersManager, HttpError, hasRequiredFields } from '~/utils'
 
 const pushSubscriber = async (longitude, latitude, webpush) => {
-  //console.log("Here's what i'm going to push to pg", longitude, latitude, webpush)
   const query = `
     INSERT INTO subscriber (location, endpoint, p256dh, auth)
     values (ST_Point($1, $2), $3, $4, $5)
@@ -23,11 +22,17 @@ const getSubscribers = async () => {
 }
 
 // todo don't worry about this
-const getSubscribersInGeometry = async () => {
-
+const getSubscribersInGeometry = async (affectedGeometry) => {
+  const query = `
+    SELECT * FROM subscriber
+    WHERE ST_CONTAINS(ST_GeomFromGeoJSON($1), subscriber.location)
+  `
+  const { rows } = await db.query(query, [affectedGeometry])
+  return rows
 }
 
 export {
   pushSubscriber,
   getSubscribers,
+  getSubscribersInGeometry,
 }
